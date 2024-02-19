@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>frame164.jpg</filename>
+	<path>D:\programming\python\CYBERRYBA\images-tf\train\frame164.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>400</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>red</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>189</xmin>
+			<ymin>310</ymin>
+			<xmax>220</xmax>
+			<ymax>370</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>IMG_5302.jpg</filename>
+	<path>D:\programming\python\CYBERRYBA\tf\images-tf\train\IMG_5302.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>3024</width>
+		<height>4032</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>green</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1490</xmin>
+			<ymin>1612</ymin>
+			<xmax>1626</xmax>
+			<ymax>2524</ymax>
+		</bndbox>
+	</object>
+</annotation>

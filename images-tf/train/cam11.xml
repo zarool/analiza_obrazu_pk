@@ -1,0 +1,26 @@
+<annotation>
+	<folder>tf images</folder>
+	<filename>cam11.jpg</filename>
+	<path>D:\programming\python\CYBERRYBA\tf images\cam11.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2592</width>
+		<height>1944</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>blue</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1626</xmin>
+			<ymin>1022</ymin>
+			<xmax>1680</xmax>
+			<ymax>1273</ymax>
+		</bndbox>
+	</object>
+</annotation>
