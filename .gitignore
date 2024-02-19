@@ -3,4 +3,6 @@ images/
 images-output/
 images-test/
 images-tf/
+images-tf/train/
+images-tf/validate/
 tf/
