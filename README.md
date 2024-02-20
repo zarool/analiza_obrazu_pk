@@ -1,10 +1,20 @@
 # Analiza obrazu - kod masztu
 
+Generalnie kod opiewa na modulacji obrazem wejściowym, tak, aby ustawić odpowiednie kontury, jasność, kolor aby przy poszukiwanym obiekcie powstały kontury a algorytm opencv2 był w stanie wychwycić ten kontur i podał jego współrzędne - następnie rysowany jest kwadrat wokół tego konturu, co pozwala na późniejsze wyszukanie koloru.
+W trakcie pracy jest dodawanie sieci neurowonych i trenowanie własnego modelu rozpoznawania obrazu, tak, aby mógł przechwycić poszukiwany obiekt.
+
+```
+![Zrzut ekranu działającego programu](```
+https://github.com/zarool/analiza_obrazu_pk/blob/main/dokumentacja/new-cam-out.png?raw=true
+```)
+```
+
 Krótki spis treści
 1. [ Pliki ](#files)  
 2. [Potrzebne biblioteki](#dependencies)
 3. [ Uruchomienie ](#usage)
-
+4. [Opis funkcji w programie](#functions)
+   
 <a name="files"></a>
 ## Pliki
 Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
