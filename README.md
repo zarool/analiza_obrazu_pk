@@ -1,4 +1,4 @@
-# Analiza obrazu - kod masztu
+# Analiza obrazu - kod masztu - wersja OOP
 
 Generalnie kod opiewa na modulacji obrazem wejściowym, tak, aby ustawić odpowiednie kontury, jasność, kolor aby przy poszukiwanym obiekcie powstały kontury a algorytm opencv2 był w stanie wychwycić ten kontur i podał jego współrzędne - następnie rysowany jest kwadrat wokół tego konturu, co pozwala na późniejsze wyszukanie koloru. <br>
 W trakcie pracy jest dodawanie sieci neurowonych i trenowanie własnego modelu rozpoznawania obrazu, tak, aby mógł przechwycić poszukiwany obiekt.
