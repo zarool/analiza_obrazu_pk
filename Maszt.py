@@ -45,6 +45,7 @@ class Maszt:
 
         # OPENCV CAMERA OBJECT, VIDEO FROM THAT OBJECT, IMAGES TO READ FROM
         self.camera, self.video, self.images = self.camera_obj.prepare_devices(self.cam_disp)
+        print(self.images)
 
         # WINDOW OBJECT
         self.window = Window()

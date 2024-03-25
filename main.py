@@ -1,7 +1,7 @@
 from Maszt import Maszt
 import cv2
 
-analiza = Maszt()
+analiza = Maszt(cam_disp=0)
 
 while True:
     analiza.start()
