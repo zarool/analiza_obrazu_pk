@@ -61,7 +61,7 @@ Dodatkowe parametry podczas inicjalizacji obiektu (`analiza = Maszt(---)`):
 
 
 <a name="camera_modes"></a>
-### Tryby działania kamery
+### Tryby działania kamery IMX219
 
 | Indeks | Szerokość [px] | Wysokość [px] | FPS |
 |--------|----------------|---------------|-----|
