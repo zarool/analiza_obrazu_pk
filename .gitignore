@@ -5,3 +5,4 @@ images-test/
 images-tf/
 tf/
 dokumentacja/
+__pycache__/
