@@ -16,7 +16,8 @@ CAMERA_MODES = [
 
 
 class Maszt:
-    def __init__(self, cam_disp=1, contour=0, detect=1, info=1, flip=0, current=0, mode=0, object_w=4, object_l=15):
+    def __init__(self, cam_disp=1, contour=0, detect=1, info=1, flip=0, current=0, mode=0, display_w=600, display_h=400,
+                 object_w=4, object_l=15):
         # system arguments default values
         self.cam_disp = cam_disp
         self.contour = contour
@@ -26,6 +27,10 @@ class Maszt:
 
         # 0 - default, 2 - turn 180 [deg]
         self.FLIP = flip
+
+        # display window size
+        self.display_w = display_w
+        self.display_h = display_h
 
         # CAPTURE MODE
         # all modes in main configuration script file
@@ -54,6 +59,20 @@ class Maszt:
         # UTILS
         self.utils = Utils()
 
+    def update_image_param(self, threshold1, threshold2, min_area, max_area, brightness_v, contrast_v, lower_color,
+                           upper_color):
+        self.window.threshold1 = threshold1
+        self.window.threshold2 = threshold2
+        self.window.min_area = min_area
+        self.window.max_area = max_area
+        self.window.brightness_v = brightness_v
+        self.window.contrast_v = contrast_v
+        self.window.lower_color = lower_color
+        self.window.upper_color = upper_color
+
+    def update_image_exposure(self, exposure_value):
+        self.set_exposure(exposure_value)
+
     def set_exposure(self, value):
         if self.RUN:
             exp_value = (value - 20) / 10
@@ -66,6 +85,7 @@ class Maszt:
     def start(self):
 
         # updating trackbars
+        # COMMENT IF NOT USING OPENCV WINDOW MANAGER
         self.window.get_trackbar_value()
 
         # 0

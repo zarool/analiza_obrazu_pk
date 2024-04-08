@@ -27,11 +27,11 @@ Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 
 ## Biblioteki
 
-|                 | Wersja                                                                |
-|-----------------|-----------------------------------------------------------------------|
-| opencv2		       | `>= 4.0.0`- im nowsza tym lepiej, kluczowa do odbioru obrazu z kamery |
-| numpy        	  | 	Zawarta w interpreterze                                              |
-| JetCam          | Znajduje się w folderze jetcam, nic nie trzeba zmieniać               |
+|                | Wersja                                                                |
+|----------------|-----------------------------------------------------------------------|
+| opencv2		      | `>= 4.0.0`- im nowsza tym lepiej, kluczowa do odbioru obrazu z kamery |
+| numpy        	 | 	Zawarta w interpreterze                                              |
+| JetCam         | Znajduje się w folderze jetcam, nic nie trzeba zmieniać               |
 
 <a name="usage"></a>
 
@@ -44,6 +44,14 @@ Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 `analiza.start()` - uruchomienie analizy obrazu oraz potrzebnych okienek do działania
 
 `analiza.close()` - zamknięcie programu
+
+| Nazwa funkcji                   | Parametry                                                                                        | Opis                                                                                                                        |
+|---------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `maszt.update_image_param()`    | `threshold1, threshold2, min_area, max_area, brightness_v, contrast_v, lower_color, upper_color` | Aktualizacja parametrów do modulacji obrazem. Zmienne `lower_color` oraz `upper_color` to tablice w postaci `[0, 0, 0]`     |
+| `maszt.update_image_exposure()` | `exposure_value`                                                                                 | Zmiana ekspozycji kamery, funkcja resetuje kamerę                                                                           |
+| `maszt.set_exposure()`          | `value` (funkcja nieużywana przez użytkownika)                                                   | Funkcja tworza nowy obiekt kamery z zadaną ekspozycją                                                                       |
+| `maszt.start()`                 | `-`                                                                                              | Uruchomienie algorytmu, jeżeli nie używamy okna sliderów z cv2, w pliku `Maszt.py` należy skomentować <b><u>linię 89<u></b> |
+| `maszt.close()`                 | `-`                                                                                              | Zamknięcie wszystkich okien i usunięcie kamery z bufora                                                                     |
 
 Dodatkowe parametry podczas inicjalizacji obiektu (`analiza = Maszt(---)`):
 
@@ -58,10 +66,14 @@ Dodatkowe parametry podczas inicjalizacji obiektu (`analiza = Maszt(---)`):
 | `mode=`                 | `0`              | ustawienie rozdzielczości oraz ilości klatek w jakiej ma pracować kamera, dokładny opis [poniżej](#camera_modes)                                 |
 | `object_w=`             | `4` [cm]         | szerokość szukanego obiektu, do obliczenia odległości - na ten moment nie działa poprawnie                                                       |
 | `object_l=`             | `15` [cm]        | długość (wysokość) szukanego obiektu, do obliczenia odległości - na ten moment nie działa poprawnie                                              |
-
+| `display_w=`            | `600`            | szerokość renderowanego obrazu w funkcji `cv.imshow()`                                                                                           |
+| `display_h=`            | `400`            | wysokość renderowanego obrazu w funkcji `cv.imshow()`                                                                                            |
 
 <a name="camera_modes"></a>
+
 ### Tryby działania kamery IMX219
+
+Tryby można zmienić w pliku `Maszt.py` na początku skryptu, w przyszłości dodam tryby dla poszczególnych kamer, aby wystarczyło wpisać np. `mode='IMX219 0'`
 
 | Indeks | Szerokość [px] | Wysokość [px] | FPS |
 |--------|----------------|---------------|-----|
@@ -76,6 +88,7 @@ Dodatkowe parametry podczas inicjalizacji obiektu (`analiza = Maszt(---)`):
 
 ### Opis podstawowych funkcji w programie
 
-Samo działanie funkcji jest opisane w poprzednim pliku. W razie jakiś błędów czekam na kontakt. 
+Samo działanie funkcji jest opisane w main branch. W razie jakiś błędów czekam na kontakt.
 
-W przyszłości będzie dodana funkcjonalność zwracania obrazu jako zmiennej w celu jeszcze późniejszej analizy, bądź do wykorzystania w kolejnym planowanym module do serwo kamery - podążanie kamerą za wykrytym obiektem.
+W przyszłości będzie dodana funkcjonalność zwracania obrazu jako zmiennej w celu jeszcze późniejszej analizy, bądź do
+wykorzystania w kolejnym planowanym module do serwo kamery - podążanie kamerą za wykrytym obiektem.
