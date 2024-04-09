@@ -16,7 +16,7 @@ CAMERA_MODES = [
 
 
 class Maszt:
-    def __init__(self, cam_disp=1, contour=0, detect=1, info=1, flip=0, current=0, mode=0, display_w=600, display_h=400,
+    def __init__(self, cam_disp=1, contour=0, detect=1, info=1, flip=2, current=0, mode=0, display_w=600, display_h=400,
                  object_w=4, object_l=15):
         # system arguments default values
         self.cam_disp = cam_disp
@@ -46,7 +46,7 @@ class Maszt:
         self.RUN = False
 
         # OBJECT CAMERA
-        self.camera_obj = Camera(self.WIDTH, self.HEIGHT, self.FPS, self.FLIP)
+        self.camera_obj = Camera(self.WIDTH, self.HEIGHT, self.display_w, self.display_h, self.FPS, self.FLIP)
 
         # OPENCV CAMERA OBJECT, VIDEO FROM THAT OBJECT, IMAGES TO READ FROM
         self.camera, self.video, self.images = self.camera_obj.prepare_devices(self.cam_disp)
