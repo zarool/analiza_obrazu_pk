@@ -14,8 +14,8 @@ automatycznie przechwycić poszukiwany obiekt.
 
 1. [ Pliki ](#files)
 2. [Potrzebne biblioteki](#dependencies)
-3. [Hardware](#hw)
-4. [ Uruchomienie ](#usage)
+3. [ Uruchomienie ](#usage)
+4. [Hardware](#hw)
 5. [Opis funkcji w programie](#functions)
 
 <a name="files"></a>
@@ -61,6 +61,12 @@ Dodatkowe parametry jakie można użyć podczas uruchamiania programu (szczegó�
 | `width`                 | `-`              | Ustawienie szerokości wyświetlanego obrazu w oknie opencv2                                                                                                                      |
 | `height`                | `-`              | Ustawienie wysokości wyświetlanego obrazu w oknie opencv2                                                                                                                       |
 | `mode, m`               | `0`              | Zmiana trybu pracy kamery (rozdzielczość oraz ilość odbieranych klatek), opisane w tabeli poniżej                                                                               |
+
+<a name="hw"></a>
+
+## Hardware
+
+Tryby działania kamery IMX219 użytej w programie
 
 | Indeks | Szerokość [px] | Wysokość [px] | FPS |
 |--------|----------------|---------------|-----|
