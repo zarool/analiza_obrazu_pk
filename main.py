@@ -3,20 +3,22 @@ import numpy as np
 import utils
 import system
 
-# system arguments default values
-default_disp_cam = 1
-default_contour = 0
-default_detect = 1
-default_info = 1
-default_flip = 0
+# CONST
+CAMERA_DISP = 0
+WINDOW_DRAW_CONT = 0
+WINDOW_DRAW_DETECT = 0
+WINDOW_DRAW_INFO = 0
+CURRENT_IMG = 0
+CAPTURE_FLIP = 2
+CAPTURE_MODE = 0
+# for image render
+RENDER_WIDTH = 600
+RENDER_HEIGHT = 400
 
-# CAPTURE MODE
-# all modes in main configuration script file
-WIDTH = 3264
-HEIGHT = 2464
-FPS = 21
-# 0 - default, 2 - turn 180 [deg]
-FLIP = 0
+# CAPTURE MODES
+CAPTURE_WIDTH = 3264
+CAPTURE_HEIGHT = 2464
+CAPTURE_FPS = 21
 
 # OBJECT TO DETECT
 OBJECT_W = 4  # [cm]
@@ -43,7 +45,8 @@ def set_exposure(value):
         # reset camera and create new one with different exposure
         camera.cap.release()
         camera = None
-        camera = system.set_camera(WIDTH, HEIGHT, FPS, FLIP, exp_value)
+        camera = system.set_camera(RENDER_WIDTH, RENDER_HEIGHT, CAPTURE_WIDTH, CAPTURE_HEIGHT,
+                                   CAPTURE_FPS, CAPTURE_FLIP, exp_value)
 
 
 window_main = "Image processing"
@@ -63,6 +66,10 @@ cv2.createTrackbar("V low", window_option, 0, 255, empty)
 cv2.createTrackbar("H high", window_option, 179, 179, empty)
 cv2.createTrackbar("S high", window_option, 255, 255, empty)
 cv2.createTrackbar("V high", window_option, 255, 255, empty)
+cv2.createTrackbar("Search for red", window_option, 0, 1, empty)
+cv2.createTrackbar("Search for green", window_option, 0, 1, empty)
+cv2.createTrackbar("Search for blue", window_option, 0, 1, empty)
+cv2.createTrackbar("Reset HSV", window_option, 0, 1, empty)
 
 
 def recognition():
@@ -71,10 +78,12 @@ def recognition():
     print(
         f"=======================\n"
         f"Running image processing program\n"
-        f"Use camera: {bool(CAM_DISP)}\n"
-        f"Draw contour: {bool(DRAW_CONT)}\n"
-        f"Draw rectangles: {bool(DRAW_DETECT)}\n"
-        f"Display info: {bool(DRAW_INFO)}\n"
+        f"Use camera: {bool(CAMERA_DISP)}\n"
+        f"Output stream resolution:\n"
+        f"W = {CAPTURE_WIDTH} | H = {CAPTURE_HEIGHT} | FPS = {CAPTURE_FPS}\n"
+        f"Draw contour: {bool(WINDOW_DRAW_CONT)}\n"
+        f"Draw rectangles: {bool(WINDOW_DRAW_DETECT)}\n"
+        f"Display info: {bool(WINDOW_DRAW_INFO)}\n"
         f"Current image: cam{CURRENT_IMG}.jpg\n"
         f"=======================\n")
 
@@ -82,14 +91,16 @@ def recognition():
     while True:
         # 0
         # capturing video frame
-        if CAM_DISP:
+        if CAMERA_DISP:
             if camera is not None:
+                # read from external camera
                 image = camera.read()
                 RUN = True
             else:
+                # read from laptop camera if is any
                 _, image = video.read()
         else:
-            # capturing image
+            # read from images/cam*.jpg
             img = images[current_img]
             image = cv2.resize(img, (640, 640))
 
@@ -110,7 +121,7 @@ def recognition():
         # image operations to get black and white contours
         image = utils.masking(image, lower_color, upper_color)
         image, contours = utils.get_contours(image, [threshold1, threshold2], contrast_v, brightness_v,
-                                             draw=DRAW_CONT)
+                                             draw=WINDOW_DRAW_CONT)
 
         # 2
         # detecting squares from image and returning it with square contours
@@ -127,7 +138,7 @@ def recognition():
         # 3
         # display detected rectangles and
         # display info about length, width and color
-        utils.display_info(image, final_contours, draw_detect=DRAW_DETECT, draw_info=DRAW_INFO)
+        utils.display_info(image, final_contours, draw_detect=WINDOW_DRAW_DETECT, draw_info=WINDOW_DRAW_INFO)
 
         # 4
         # showing final image
@@ -140,7 +151,7 @@ def recognition():
             break
 
         # keyboard functionality - only when not using camera, because it slows the program
-        if not CAM_DISP:
+        if not CAMERA_DISP:
             if cv2.waitKey(50) == ord('n'):
                 current_img = current_img + 1 if current_img < 12 else 0
                 print(f"Current image: cam{current_img}.jpg")
@@ -158,20 +169,14 @@ def recognition():
 
 if __name__ == "__main__":
     # using script arguments to display additional things (or not)
-    # python3 main.py
-    # --camera <CAM_DISP 1/0>
-    # -c <DRAW_CONT 1/0>
-    # -d <DRAW_DETECT 1/0>
-    # -i <DRAW_INFO 1/0>
-    # --image <current_img 13-0>
-    CAM_DISP, DRAW_CONT, DRAW_DETECT, DRAW_INFO, CURRENT_IMG, FLIP = system.arguments(default_disp_cam,
-                                                                                      default_contour,
-                                                                                      default_detect,
-                                                                                      default_info,
-                                                                                      default_flip)
+    (CAMERA_DISP, WINDOW_DRAW_CONT, WINDOW_DRAW_DETECT, WINDOW_DRAW_INFO, CURRENT_IMG,
+     CAPTURE_FLIP, RENDER_WIDTH, RENDER_HEIGHT, CAPTURE_MODE, CAPTURE_WIDTH, CAPTURE_HEIGHT,
+     CAPTURE_FPS) = system.arguments()
 
     # check which device to use, load images or camera
-    camera, video, images = system.prepare_devices(CAM_DISP, WIDTH, HEIGHT, FPS, FLIP)
+    camera, video, images = system.prepare_devices(CAMERA_DISP, RENDER_WIDTH, RENDER_HEIGHT,
+                                                   CAPTURE_WIDTH, CAPTURE_HEIGHT,
+                                                   CAPTURE_FPS, CAPTURE_FLIP)
 
     # main script with recognition
     recognition()

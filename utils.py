@@ -116,7 +116,7 @@ def approx_color(img, x, y, w, h):
 
 # SECOND FUNCTION THAT WILL DETECT SQUARES AND RECTANGLES BASED ON IMAGE CONTOURS
 # AND RETURNING FINAL CONTOURS OF ALL OBJECTS THAT WERE DETECTED
-def detect_square(model_image, final_image, min_area, max_area, OBJECT_W, OBJECT_L):
+def detect_square(model_image, final_image, min_area, max_area, object_w, object_l):
     # finding contours with cv2 function
     contours, hierarchy = cv2.findContours(model_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     # cv2.CHAIN_APPROX_SIMPLE
@@ -139,7 +139,7 @@ def detect_square(model_image, final_image, min_area, max_area, OBJECT_W, OBJECT
             x, y, w, h = cv2.boundingRect(approx)
 
             # getting object properties
-            width_cm, length_cm, dist = approx_length(rect, OBJECT_W, OBJECT_L)
+            width_cm, length_cm, dist = approx_length(rect, object_w, object_l)
             color, fit = approx_color(final_image, x, y, w, h)
 
             # testing - delete later

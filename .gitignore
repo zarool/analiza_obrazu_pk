@@ -1,6 +1,5 @@
 # Ignore
 HUV/
-images-output/
 images-test/
 images-tf/
-tf/
+tf-old/
