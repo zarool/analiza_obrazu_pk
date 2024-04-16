@@ -75,19 +75,24 @@ Dodatkowe parametry jakie można użyć podczas uruchamiania programu (szczegó�
 
 ## Opis funkcji w programie
 
-Sterowanie programem:
+* Sterowanie programem:
+    - `q` - zamyka program
+    - `n` oraz `b` służą do przechodzenia pomiedzy zdjęciami
 
-- `q` - zamyka program
-- `n` oraz `b` służą do przechodzenia pomiedzy zdjęciami
+ <br>  
 
-| Nazwa funkcji          | `main.py`                                                                                                                                                                                                        |
+* `main.py`
+
+| Nazwa funkcji          | Opis                                                                                                                                                                                                             |
 |------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `set_exposure(valuse)` | Zmiana ekspozycji kamery, wymaga restartu, dlatego znajduje się w głównym programie                                                                                                                              |
 | `recognition()`        | Główna pętla programu, uruchamiana zaraz po ustawieniu parametrów, sprawdza na początku czy jest odczyt z kamery, odczytuje wartości ze sliderów a następnie wykonuje algorytm z modyfikacją obrazu (`utils.py`) |
 
 <br>
 
-| Nazwa funkcji                                                                            | `utils.py`                                                                                                                                                                                                                                             |
+* `utils.py`
+
+| Nazwa funkcji                                                                            | Opis                                                                                                                                                                                                                                                   |
 |------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `masking(img, lower, upper)`                                                             | Maskowanie obrazu zgodnie z paletą HSV, w zależności od tego jak ustawimy slidery, możemy uzyskać wychwytywanie tylko konkretnego koloru z obrazu                                                                                                      |
 | `get_contours(img, c_thr, contrast, brightness, draw=True)`                              | Algorytm opencv2, z podanego obrazu funkcja zwraca nam potrzebne kontury do dalszej analizy (w funkcji są wykomentowane poszczególne etapy)                                                                                                            |
@@ -98,7 +103,9 @@ Sterowanie programem:
 
 <br>
 
-| Nazwa funkcji     | `system.py`                                                                       |
+* `system.py`
+
+| Nazwa funkcji     | Opis                                                                              |
 |-------------------|-----------------------------------------------------------------------------------|
 | `set_camera`      | Uruchamia odczyt obrazu z kamery przy użyciu biblioteki JetCam                    |
 | `prepare_devices` | Sprawdza czy odczyt z kamery jest możliwy - jeżeli nie, odczytuje obraz z laptopa |
