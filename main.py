@@ -24,7 +24,7 @@ CAPTURE_FPS = 21
 OBJECT_W = 4  # [cm]
 OBJECT_L = 15  # [cm]
 
-# OBJECT CAMERA
+# CAMERA OBJECT
 camera = None
 
 # BOOL to don't open camera twice at beginning of program (used for changing exposure in set_exposure())

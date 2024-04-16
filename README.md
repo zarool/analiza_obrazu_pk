@@ -8,7 +8,7 @@ innymi typami kamer. <br>
 W trakcie pracy jest dodawanie sieci neurowonych i trenowanie własnego modelu rozpoznawania obrazu, tak, aby mógł
 automatycznie przechwycić poszukiwany obiekt.
 
-![Zrzut ekranu działającego programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/dokumentacja/new-cam-out.png?raw=true)
+![Zrzut ekranu działającego programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/dokumentacja/images-output-old/out0.png?raw=true)
 
 ### Spis treści
 
@@ -85,6 +85,8 @@ Sterowanie programem:
 | `set_exposure(valuse)` | Zmiana ekspozycji kamery, wymaga restartu, dlatego znajduje się w głównym programie                                                                                                                              |
 | `recognition()`        | Główna pętla programu, uruchamiana zaraz po ustawieniu parametrów, sprawdza na początku czy jest odczyt z kamery, odczytuje wartości ze sliderów a następnie wykonuje algorytm z modyfikacją obrazu (`utils.py`) |
 
+<br>
+
 | Nazwa funkcji                                                                            | `utils.py`                                                                                                                                                                                                                                             |
 |------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `masking(img, lower, upper)`                                                             | Maskowanie obrazu zgodnie z paletą HSV, w zależności od tego jak ustawimy slidery, możemy uzyskać wychwytywanie tylko konkretnego koloru z obrazu                                                                                                      |
@@ -93,6 +95,8 @@ Sterowanie programem:
 | `display_info(final_image, contour, ...)`                                                | Nanosi na wyświetlany obraz dodatkowe informacje                                                                                                                                                                                                       |
 | `approx_length(rect, object_w, object_l)`                                                | Wyliczenie długości oraz szerokości odnalezionego obiektu, jeszcze w trakcie pracy, należy przeprowadzić kilka testów                                                                                                                                  |
 | `approx_color(image, x, y, w, h)`                                                        | Algorytm szacujący kolor na podstawie prostokąta podanego w parametrach funkcji - oblicza średnią z kolorów każdego z pikseli a następnie dopasowuje najbliższy z podanej tablicy `colors = {"black", "red", "green", "blue"}` - dalej w trakcie pracy |
+
+<br>
 
 | Nazwa funkcji     | `system.py`                                                                       |
 |-------------------|-----------------------------------------------------------------------------------|
