@@ -34,6 +34,7 @@ def prepare_devices(cam_disp, render_width, render_height, capture_width, captur
     cam = None
     vid = None
     images_a = []
+    size = 0
     if cam_disp:
         try:
             cam = set_camera(render_width, render_height, capture_width, capture_height, capture_fps, capture_flip)
@@ -54,7 +55,7 @@ def prepare_devices(cam_disp, render_width, render_height, capture_width, captur
         for index in range(0, size):
             images_a.append(cv2.imread(f"./images/cam{index}.jpg"))
 
-    return cam, vid, images_a
+    return cam, vid, images_a, size
 
 
 def arguments():

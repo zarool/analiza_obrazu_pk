@@ -11,7 +11,7 @@ WINDOW_DRAW_INFO = 0
 CURRENT_IMG = 0
 CAPTURE_FLIP = 2
 CAPTURE_MODE = 0
-# for image render
+
 RENDER_WIDTH = 600
 RENDER_HEIGHT = 400
 
@@ -30,11 +30,26 @@ camera = None
 # BOOL to don't open camera twice at beginning of program (used for changing exposure in set_exposure())
 RUN = False
 
+# HSV SETTINGS
+hsv_mode = 0
+hsv_modes_arr = [[0, 0, 0, 179, 255, 255],
+                 [80, 70, 50, 100, 255, 255],
+                 [36, 0, 0, 86, 255, 255],
+                 [110, 50, 50, 130, 255, 255]]
+
+# IMAGES SETTINGS
+images_size = 0
+
 
 # OPEN CV TRACKBARS
 # function is called whenever trackbar change its value
 def empty(a):
     pass
+
+
+def set_hsv_mode(a, mode):
+    global hsv_mode
+    hsv_mode = mode
 
 
 def set_exposure(value):
@@ -66,10 +81,10 @@ cv2.createTrackbar("V low", window_option, 0, 255, empty)
 cv2.createTrackbar("H high", window_option, 179, 179, empty)
 cv2.createTrackbar("S high", window_option, 255, 255, empty)
 cv2.createTrackbar("V high", window_option, 255, 255, empty)
-cv2.createTrackbar("Search for red", window_option, 0, 1, empty)
-cv2.createTrackbar("Search for green", window_option, 0, 1, empty)
-cv2.createTrackbar("Search for blue", window_option, 0, 1, empty)
-cv2.createTrackbar("Reset HSV", window_option, 0, 1, empty)
+cv2.createTrackbar("Search for red", window_option, 0, 1, lambda x: set_hsv_mode(x, 1))
+cv2.createTrackbar("Search for green", window_option, 0, 1, lambda x: set_hsv_mode(x, 2))
+cv2.createTrackbar("Search for blue", window_option, 0, 1, lambda x: set_hsv_mode(x, 3))
+cv2.createTrackbar("Reset HSV", window_option, 0, 1, lambda x: set_hsv_mode(x, 0))
 
 
 def recognition():
@@ -85,6 +100,7 @@ def recognition():
         f"Draw rectangles: {bool(WINDOW_DRAW_DETECT)}\n"
         f"Display info: {bool(WINDOW_DRAW_INFO)}\n"
         f"Current image: cam{CURRENT_IMG}.jpg\n"
+        f"Images folder size: {images_size}\n"
         f"=======================\n")
 
     # main loop
@@ -102,7 +118,16 @@ def recognition():
         else:
             # read from images/cam*.jpg
             img = images[current_img]
-            image = cv2.resize(img, (640, 640))
+            image = cv2.resize(img, (RENDER_WIDTH, RENDER_HEIGHT))
+
+        # set trackbar values
+        if hsv_mode is not 0:
+            cv2.setTrackbarPos("H low", window_option, hsv_modes_arr[hsv_mode][0])
+            cv2.setTrackbarPos("S low", window_option, hsv_modes_arr[hsv_mode][1])
+            cv2.setTrackbarPos("V low", window_option, hsv_modes_arr[hsv_mode][2])
+            cv2.setTrackbarPos("H high", window_option, hsv_modes_arr[hsv_mode][3])
+            cv2.setTrackbarPos("S high", window_option, hsv_modes_arr[hsv_mode][4])
+            cv2.setTrackbarPos("V high", window_option, hsv_modes_arr[hsv_mode][5])
 
         # updating trackbar values
         threshold1 = cv2.getTrackbarPos("Threshold 1", window_option)
@@ -153,10 +178,10 @@ def recognition():
         # keyboard functionality - only when not using camera, because it slows the program
         if not CAMERA_DISP:
             if cv2.waitKey(50) == ord('n'):
-                current_img = current_img + 1 if current_img < 12 else 0
+                current_img = current_img + 1 if current_img < (images_size - 1) else 0
                 print(f"Current image: cam{current_img}.jpg")
             if cv2.waitKey(50) == ord('b'):
-                current_img = current_img - 1 if current_img > 0 else 12
+                current_img = current_img - 1 if current_img > 0 else (images_size - 1)
                 print(f"Current image: cam{current_img}.jpg")
 
     # closing camera only if using it
@@ -174,9 +199,9 @@ if __name__ == "__main__":
      CAPTURE_FPS) = system.arguments()
 
     # check which device to use, load images or camera
-    camera, video, images = system.prepare_devices(CAMERA_DISP, RENDER_WIDTH, RENDER_HEIGHT,
-                                                   CAPTURE_WIDTH, CAPTURE_HEIGHT,
-                                                   CAPTURE_FPS, CAPTURE_FLIP)
+    camera, video, images, images_size = system.prepare_devices(CAMERA_DISP, RENDER_WIDTH, RENDER_HEIGHT,
+                                                                CAPTURE_WIDTH, CAPTURE_HEIGHT,
+                                                                CAPTURE_FPS, CAPTURE_FLIP)
 
     # main script with recognition
     recognition()
