@@ -2,7 +2,7 @@ from Maszt import Maszt
 import cv2
 
 analiza = Maszt()
-
+print(analiza)
 while True:
     analiza.start()
 

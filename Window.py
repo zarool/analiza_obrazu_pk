@@ -25,6 +25,11 @@ class Window:
         cv2.createTrackbar("S high", self.window_option, 255, 255, empty)
         cv2.createTrackbar("V high", self.window_option, 255, 255, empty)
 
+        cv2.createTrackbar("Search for red", self.window_option, 0, 1, self.set_hsv_color_red)
+        cv2.createTrackbar("Search for green", self.window_option, 0, 1, self.set_hsv_color_green)
+        cv2.createTrackbar("Search for blue", self.window_option, 0, 1, self.set_hsv_color_blue)
+        cv2.createTrackbar("Reset HSV", self.window_option, 0, 1, self.set_hsv_color_clear_buffer)
+
         self.threshold1 = 0
         self.threshold2 = 0
         self.min_area = 0
@@ -50,3 +55,47 @@ class Window:
         self.upper_color = np.array([cv2.getTrackbarPos("H high", self.window_option),
                                      cv2.getTrackbarPos("S high", self.window_option),
                                      cv2.getTrackbarPos("V high", self.window_option)])
+
+    def set_hsv_color_red(self, x=0):
+        self.lower_color = [80, 70, 50]
+        self.upper_color = [100, 255, 255]
+
+        cv2.setTrackbarPos("H low", self.window_option, 80)
+        cv2.setTrackbarPos("S low", self.window_option, 70)
+        cv2.setTrackbarPos("V low", self.window_option, 50)
+        cv2.setTrackbarPos("H high", self.window_option, 100)
+        cv2.setTrackbarPos("S high", self.window_option, 255)
+        cv2.setTrackbarPos("V high", self.window_option, 255)
+
+    def set_hsv_color_green(self, x=0):
+        self.lower_color = [36, 0, 0]
+        self.upper_color = [86, 255, 255]
+
+        cv2.setTrackbarPos("H low", self.window_option, 36)
+        cv2.setTrackbarPos("S low", self.window_option, 0)
+        cv2.setTrackbarPos("V low", self.window_option, 0)
+        cv2.setTrackbarPos("H high", self.window_option, 86)
+        cv2.setTrackbarPos("S high", self.window_option, 255)
+        cv2.setTrackbarPos("V high", self.window_option, 255)
+
+    def set_hsv_color_blue(self, x=0):
+        self.lower_color = [110, 50, 50]
+        self.upper_color = [130, 255, 255]
+
+        cv2.setTrackbarPos("H low", self.window_option, 110)
+        cv2.setTrackbarPos("S low", self.window_option, 50)
+        cv2.setTrackbarPos("V low", self.window_option, 50)
+        cv2.setTrackbarPos("H high", self.window_option, 130)
+        cv2.setTrackbarPos("S high", self.window_option, 255)
+        cv2.setTrackbarPos("V high", self.window_option, 255)
+
+    def set_hsv_color_clear_buffer(self, x=0):
+        self.lower_color = [0, 0, 0]
+        self.upper_color = [179, 255, 255]
+
+        cv2.setTrackbarPos("H low", self.window_option, 0)
+        cv2.setTrackbarPos("S low", self.window_option, 0)
+        cv2.setTrackbarPos("V low", self.window_option, 0)
+        cv2.setTrackbarPos("H high", self.window_option, 255)
+        cv2.setTrackbarPos("S high", self.window_option, 255)
+        cv2.setTrackbarPos("V high", self.window_option, 255)

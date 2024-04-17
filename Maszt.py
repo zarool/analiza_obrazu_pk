@@ -50,7 +50,6 @@ class Maszt:
 
         # OPENCV CAMERA OBJECT, VIDEO FROM THAT OBJECT, IMAGES TO READ FROM
         self.camera, self.video, self.images = self.camera_obj.prepare_devices(self.cam_disp)
-        print(self.images)
 
         # WINDOW OBJECT
         self.window = Window()
@@ -81,6 +80,18 @@ class Maszt:
             self.camera.cap.release()
             self.camera = None
             self.camera = self.camera_obj.run_camera(exposure=exp_value)
+
+    def set_search_color_red(self):
+        self.window.set_hsv_color_red()
+
+    def set_search_color_green(self):
+        self.window.set_hsv_color_green()
+
+    def set_search_color_blue(self):
+        self.window.set_hsv_color_blue()
+
+    def set_search_color_clear_buffer(self):
+        self.window.set_hsv_color_clear_buffer()
 
     def start(self):
 
@@ -143,3 +154,16 @@ class Maszt:
         elif self.video is not None:
             self.video.release()
         cv2.destroyAllWindows()
+
+    def __str__(self):
+        return (
+            f"========================\n"
+            f"Running image processing program\n"
+            f"Use camera: {bool(self.cam_disp)}\n"
+            f"Camera stream resolution:\n"
+            f"W = {self.WIDTH} | H = {self.HEIGHT} | FPS = {self.FPS}\n"
+            f"Draw contour: {bool(self.contour)}\n"
+            f"Draw rectangles: {bool(self.detect)}\n"
+            f"Display info: {bool(self.info)}\n"
+            f"Current image: cam{self.current_img}.jpg\n"
+            f"========================\n")

@@ -15,13 +15,14 @@ Krótki spis treści
 
 Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 
-|           | Opis                                                                         |
-|-----------|------------------------------------------------------------------------------|
-| main.py   | Przykładowy plik pokazujący wykorzystanie modułu analizy obrazu jako obiektu |
-| Maszt.py  | Główna klasa, moduł importuje pozostałe potrzebne biblioteki                 |
-| Utils.py  | Klasa zawierająca głównie funkcje statyczne, przetwarza i zwraca obraz       |
-| Camera.py | Moduł uruchamiający kamerę, nagranie bądź odczytuje zdjęcia                  |
-| Window.py | Utworzenie dwóch okienek z obrazem oraz pomocnicznymi suwakami               |
+|             | Opis                                                                         |
+|-------------|------------------------------------------------------------------------------|
+| `main.py`   | Przykładowy plik pokazujący wykorzystanie modułu analizy obrazu jako obiektu |
+| `Maszt.py`  | Główna klasa, moduł importuje pozostałe potrzebne biblioteki                 |
+| `Utils.py`  | Klasa zawierająca głównie funkcje statyczne, przetwarza i zwraca obraz       |
+| `Camera.py` | Moduł uruchamiający kamerę, nagranie bądź odczytuje zdjęcia                  |
+| `Window.py` | Utworzenie dwóch okienek z obrazem oraz pomocnicznymi suwakami               |
+| `jetcam/`   | Folder z opensourcową biblioteką do obsługi kamer CSI oraz wbudowanych kamer |                                                                            |
 
 <a name="dependencies"></a>
 
@@ -37,21 +38,31 @@ Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 
 ## Uruchomienie skryptu
 
-`from Maszt import Maszt` - zaimportowanie biblioteki
+```python
+import cv2
+from Maszt import Maszt
 
-`analiza = Maszt()` - utworzenie nowego obiektu
+analiza = Maszt()
 
-`analiza.start()` - uruchomienie analizy obrazu oraz potrzebnych okienek do działania
+print(analiza)
 
-`analiza.close()` - zamknięcie programu
+while True:
+    analiza.start()
 
-| Nazwa funkcji                   | Parametry                                                                                        | Opis                                                                                                                        |
-|---------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `maszt.update_image_param()`    | `threshold1, threshold2, min_area, max_area, brightness_v, contrast_v, lower_color, upper_color` | Aktualizacja parametrów do modulacji obrazem. Zmienne `lower_color` oraz `upper_color` to tablice w postaci `[0, 0, 0]`     |
-| `maszt.update_image_exposure()` | `exposure_value`                                                                                 | Zmiana ekspozycji kamery, funkcja resetuje kamerę                                                                           |
-| `maszt.set_exposure()`          | `value` (funkcja nieużywana przez użytkownika)                                                   | Funkcja tworza nowy obiekt kamery z zadaną ekspozycją                                                                       |
-| `maszt.start()`                 | `-`                                                                                              | Uruchomienie algorytmu, jeżeli nie używamy okna sliderów z cv2, w pliku `Maszt.py` należy skomentować <b><u>linię 89<u></b> |
-| `maszt.close()`                 | `-`                                                                                              | Zamknięcie wszystkich okien i usunięcie kamery z bufora                                                                     |
+    if cv2.waitKey(1) == ord('q'):
+        print("Closing program without errors.")
+        break
+analiza.close()
+```
+
+| Nazwa funkcji                     | Parametry                                                                                        | Opis                                                                                                                        |
+|-----------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `analiza.update_image_param()`    | `threshold1, threshold2, min_area, max_area, brightness_v, contrast_v, lower_color, upper_color` | Aktualizacja parametrów do modulacji obrazem. Zmienne `lower_color` oraz `upper_color` to tablice w postaci `[0, 0, 0]`     |
+| `analiza.update_image_exposure()` | `exposure_value`                                                                                 | Zmiana ekspozycji kamery, funkcja resetuje kamerę                                                                           |
+| `analiza.set_exposure()`          | `value` (funkcja nieużywana przez użytkownika)                                                   | Funkcja tworza nowy obiekt kamery z zadaną ekspozycją                                                                       |
+| `analiza.start()`                 | `-`                                                                                              | Uruchomienie algorytmu, jeżeli nie używamy okna sliderów z cv2, w pliku `Maszt.py` należy skomentować <b><u>linię 89<u></b> |
+| `analiza.close()`                 | `-`                                                                                              | Zamknięcie wszystkich okien i usunięcie kamery z bufora                                                                     |
+| `print(analiza)`                  | `-`                                                                                              | Wyświetlenie kluczowych informacji o aktualnych parametrach programu                                                        |
 
 Dodatkowe parametry podczas inicjalizacji obiektu (`analiza = Maszt(---)`):
 
@@ -73,7 +84,8 @@ Dodatkowe parametry podczas inicjalizacji obiektu (`analiza = Maszt(---)`):
 
 ### Tryby działania kamery IMX219
 
-Tryby można zmienić w pliku `Maszt.py` na początku skryptu, w przyszłości dodam tryby dla poszczególnych kamer, aby wystarczyło wpisać np. `mode='IMX219 0'`
+Tryby można zmienić w pliku `Maszt.py` na początku skryptu, w przyszłości dodam tryby dla poszczególnych kamer, aby
+wystarczyło wpisać np. `mode='IMX219 0'`
 
 | Indeks | Szerokość [px] | Wysokość [px] | FPS |
 |--------|----------------|---------------|-----|
