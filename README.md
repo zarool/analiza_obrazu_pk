@@ -17,6 +17,7 @@ automatycznie przechwycić poszukiwany obiekt.
 3. [ Uruchomienie ](#usage)
 4. [Hardware](#hw)
 5. [Opis funkcji w programie](#functions)
+6. [Wykorzystanie programu jako modułu](https://github.com/zarool/analiza_obrazu_pk/tree/class)
 
 <a name="files"></a>
 
