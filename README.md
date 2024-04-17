@@ -1,6 +1,6 @@
 # Analiza obrazu - kod masztu - wersja OOP
 
-[Lepszy opis działania programu.](https://github.com/zarool/analiza_obrazu_pk/blob/main/README.md)
+[Szczegółowy opis działania programu.](https://github.com/zarool/analiza_obrazu_pk/blob/main/README.md)
 
 Krótki spis treści
 
