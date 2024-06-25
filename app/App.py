@@ -64,7 +64,7 @@ class App:
             self.update_maszt(buttons_value)
 
         # update labels
-        self.window.update_info(self.maszt.get_info())
+        self.window.update_info(self.maszt.get_info(), self.maszt.get_object_info())
 
     def run(self):
         # update maszt according to ui

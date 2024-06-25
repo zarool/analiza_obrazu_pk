@@ -39,8 +39,9 @@ class Window:
         frame = pg.surfarray.make_surface(frame)
         self.screen.blit(frame, (pos_x, pos_y))
 
-    def update_info(self, maszt_info):
+    def update_info(self, maszt_info, object_info):
         self.menu.maszt_info = maszt_info
+        self.menu.object_info = object_info
 
     def moved_sliders(self):
         return self.menu.moved_sliders()

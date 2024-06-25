@@ -14,8 +14,6 @@ while True:
 
 # todo UI
 # todo create label that will return value (pos, color) of picked object
-# todo display labels as grid - name on the left, value on the right
-# todo buttons change color depending on current state - if button is will not do anything then disable it
 
 # todo maszt
 # todo return one contour object as main to follow

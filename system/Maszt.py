@@ -27,6 +27,8 @@ class Maszt:
 
         # 0 - default, 2 - turn 180 [deg]
         self.FLIP = flip
+        # BOOL to don't open camera twice at beginning of program (used for changing exposure in set_exposure())
+        self.RUN = False
 
         # display window size
         self.display_w = int(display_w)
@@ -42,8 +44,7 @@ class Maszt:
         self.OBJECT_W = object_w  # [cm]
         self.OBJECT_L = object_l  # [cm]
 
-        # BOOL to don't open camera twice at beginning of program (used for changing exposure in set_exposure())
-        self.RUN = False
+        self.detected_object = [0, 0, 0, 0, 0, 0]
 
         # OBJECT CAMERA
         self.devices = Devices(self.WIDTH, self.HEIGHT, self.display_w, self.display_h, self.FPS, self.FLIP)
@@ -128,7 +129,7 @@ class Maszt:
 
         # 4
         # todo returning picked image coordinates and color
-        # cv2.imshow('test', self.image)
+        self.detected_object = self.utils.pick_object(final_contours)
 
     def get_current_img(self):
         return self.current_img
@@ -159,6 +160,9 @@ class Maszt:
                 bool(self.info),
                 self.current_img]
         return info
+
+    def get_object_info(self):
+        return self.detected_object
 
     def __str__(self):
         return (

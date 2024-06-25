@@ -197,14 +197,39 @@ class Utils:
                             (255, 255, 255), 2)
 
                 # real distance from camera
-                cv2.putText(final_image, str(dist) + " cm", (int(x + w / 2), int(y + h + 35)),
+                cv2.putText(final_image, str(dist) + " [cm]", (int(x + w / 2), int(y + h + 35)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                             (255, 255, 255), 2)
 
                 # testing - delete later
-                cv2.putText(final_image, str(round(width_cm, 2)) + " width [px]", (int(x + w / 2), int(y + h + 50)),
+                cv2.putText(final_image, str(round(width_cm, 2)) + " [width px]", (int(x + w / 2), int(y + h + 50)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                             (255, 255, 255), 2)
+
+    @staticmethod
+    def pick_object(contours):
+        # contour element:
+        # [i, x, y, w, h, box, width_cm, length_cm, dist, color, fit]
+        # i - index,
+        # x, y - pos
+        # w, h - size
+        # box - cv2 rectangle box coordinates
+        # width_cm, length_cm - calculated real size of object
+        # dist [cm] - calculated distance from camera
+        # color - color of detected object
+        # fit - confidence of picked color <0 - 100>
+
+        for cont in contours:
+            pass
+
+        pos_x = 0
+        pos_y = 0
+        color = "black"
+        width = 0
+        height = 0
+        dist = 0
+
+        return [pos_x, pos_y, color, width, height, dist]
 
     def print_param(self):
         print(f"Threshold1: {self.threshold1} \n"
