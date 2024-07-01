@@ -52,9 +52,10 @@ Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 
 ## Uruchomienie skryptu
 
-`python3 main.py` - standardowe uruchomienie programu, wyświetli się obraz oraz osobne okienko ze sliderami
+`python3 main.py` - standardowe uruchomienie programu, wyświetli się okno ze wszystkimi modułami
 
-Dodatkowe parametry jakie można użyć podczas uruchamiania programu (szczegółowy opis po użyciu parametru `--help, -h`:
+Dodatkowe parametry jakie można użyć podczas uruchamiania programu - możliwość zmiany w oknie programu (szczegółowy opis
+po użyciu parametru `--help, -h`:
 
 | Paremtr do uruchomienia | Domyślna wartość | Opis                                                                                                                                                                            |
 |-------------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
