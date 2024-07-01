@@ -8,7 +8,7 @@ innymi typami kamer. <br>
 W trakcie pracy jest dodawanie sieci neurowonych i trenowanie własnego modelu rozpoznawania obrazu, tak, aby mógł
 automatycznie przechwycić poszukiwany obiekt.
 
-![Zrzut ekranu nowej wersji programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/dokumentacja/images-output-old/out0.png?raw=true)
+![Zrzut ekranu nowej wersji programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/assets/program.png?raw=true)
 
 ### Spis treści
 
@@ -35,7 +35,7 @@ Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 
 ### Struktura programu przedstawiona na diagramie UML
 
-![Struktura programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/dokumentacja/uml.svg?raw=true)
+![Struktura programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/assets/uml.svg?raw=true)
 <a name="dependencies"></a>
 
 ## Biblioteki
