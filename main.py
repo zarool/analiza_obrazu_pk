@@ -12,9 +12,7 @@ app = App(cam_disp=CAMERA_DISP, contour=WINDOW_DRAW_CONT, detect=WINDOW_DRAW_DET
 while True:
     app.run()
 
-# todo UI
-# todo create label that will return value (pos, color) of picked object
+# todo modernize maszt code to be more readable
 
 # todo maszt
-# todo return one contour object as main to follow
 # todo add algorithm that will search for object and automatically change parameters of image processing

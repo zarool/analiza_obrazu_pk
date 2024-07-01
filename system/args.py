@@ -4,8 +4,8 @@ import os
 # system arguments default values
 default_disp_cam = 1
 default_contour = 0
-default_detect = 1
-default_info = 1
+default_detect = 0
+default_info = 0
 default_image = 0
 default_flip = 2
 

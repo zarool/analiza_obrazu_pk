@@ -3,6 +3,22 @@ import numpy as np
 import warnings
 
 
+def render_info(final_image, color, fit, x, y, w, h, dist):
+    cv2.putText(final_image, str(color) + " " + str(fit) + "%", (int(x + w / 2), int(y + h + 20)),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                (255, 255, 255), 1)
+
+    # real distance from camera
+    cv2.putText(final_image, str(dist) + " [dist cm]", (int(x + w / 2), int(y + h + 35)),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                (255, 255, 255), 1)
+
+    # testing - delete later
+    cv2.putText(final_image, str(round(w, 2)) + " [width px]", (int(x + w / 2), int(y + h + 50)),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                (255, 255, 255), 1)
+
+
 class Utils:
 
     def __init__(self):
@@ -51,9 +67,6 @@ class Utils:
         kernel = np.ones((5, 5))
         dilation = cv2.dilate(canny, kernel, iterations=1)
         erode = cv2.erode(dilation, kernel, iterations=1)
-
-        # if draw:
-        #     cv2.imshow("Contour", erode)
 
         return image2, erode
 
@@ -121,8 +134,8 @@ class Utils:
 
         # if closest_color is not "black":
         # draw rect to calculate avg color
-        img = cv2.rectangle(img, (p1[0], p1[1]), (p2[0], p2[1]),
-                            (255, 255, 255), 1)
+        # img = cv2.rectangle(img, (p1[0], p1[1]), (p2[0], p2[1]),
+        #                     (255, 255, 255), 1)
 
         return closest_color, fit
 
@@ -183,31 +196,10 @@ class Utils:
                 cv2.drawContours(final_image, [box], 0, (0, 0, 255), 2)
 
             if draw_info:
-                # displaying info
-                # cv2.putText(final_image, "Width [cm]: " + str(int(width_cm)), (int(x + w / 2), int(y + h + 20)),
-                #             cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                #             (255, 255, 255), 2)
-                # cv2.putText(final_image, "Length [cm]: " + str(int(length_cm)), (int(x + w / 2), int(y + h + 35)),
-                #             cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                #             (255, 255, 255), 2)
-
-                # fit show how close it is to desired color
-                cv2.putText(final_image, str(color) + " " + str(fit) + "%", (int(x + w / 2), int(y + h + 20)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                            (255, 255, 255), 2)
-
-                # real distance from camera
-                cv2.putText(final_image, str(dist) + " [cm]", (int(x + w / 2), int(y + h + 35)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                            (255, 255, 255), 2)
-
-                # testing - delete later
-                cv2.putText(final_image, str(round(width_cm, 2)) + " [width px]", (int(x + w / 2), int(y + h + 50)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                            (255, 255, 255), 2)
+                render_info(final_image, color, fit, x, y, w, h, dist)
 
     @staticmethod
-    def pick_object(contours):
+    def pick_object(image, contours):
         # contour element:
         # [i, x, y, w, h, box, width_cm, length_cm, dist, color, fit]
         # i - index,
@@ -218,16 +210,40 @@ class Utils:
         # dist [cm] - calculated distance from camera
         # color - color of detected object
         # fit - confidence of picked color <0 - 100>
+        picked_object = [0, 0, 0, 0, 0, 0, 0, 0, 0, "black", 0]
+        if len(contours) == 1:
+            picked_object = contours[0]
+        else:
+            for index, cont in enumerate(contours):
+                for index1, cont1 in enumerate(contours):
+                    if index == index1:
+                        break
+                    curr_pos_x = cont[1]
+                    curr_pos_y = cont[2]
+                    curr_width = cont[3]
 
-        for cont in contours:
-            pass
+                    other_pos_x = cont1[1]
+                    other_pos_y = cont1[2]
+                    other_width = cont1[3]
 
-        pos_x = 0
-        pos_y = 0
-        color = "black"
-        width = 0
-        height = 0
-        dist = 0
+                    # if two have same pos_x value, pick the lowest one
+                    if (curr_pos_x >= other_pos_x - other_width * 5) and (curr_pos_x <= other_pos_x + other_width * 5):
+                        if curr_pos_y - other_pos_y < 0:
+                            picked_object = cont1
+                        else:
+                            picked_object = cont
+
+        pos_x = picked_object[1]
+        pos_y = picked_object[2]
+        color = picked_object[9]
+        width = picked_object[3]
+        height = picked_object[4]
+        dist = picked_object[8]
+        fit = picked_object[10]
+
+        if color is not "black":
+            cv2.drawContours(image, [picked_object[5]], 0, (0, 0, 0), 3)
+            render_info(image, color, fit, pos_x, pos_y, width, height, dist)
 
         return [pos_x, pos_y, color, width, height, dist]
 

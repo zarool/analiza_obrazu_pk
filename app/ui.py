@@ -38,7 +38,7 @@ class UI:
         UI.l_x_pos = UI.b_center[0] - int(UI.b_size[0] / 2)
 
         # pos for object info labels
-        UI.o_center = (app.screen.get_size()[0] * 3 / 5, UI.b_size[1] * 21)
+        UI.o_center = (app.screen.get_size()[0] * 2.75 / 5, UI.b_size[1] * 21)
 
         UI.colors = {
             'text': "white",
@@ -73,7 +73,7 @@ class Menu:
             Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 0), 0.47244, 0, 254, "Threshold 1:"),
             Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 3), 0.59, 0, 254, "Threshold 2:"),
             Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 6), 0.666, 0, 3000, "Max area:"),
-            Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 9), 0.117, 0, 3000, "Min area:"),
+            Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 9), 0.05, 0, 3000, "Min area:"),
             Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 12), 0.5, -100, 100, "Brightness:"),
             Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 15), 0.5, 0, 20, "Contrast:"),
             Slider((UI.s_center[0], UI.s_center[1] + UI.s_size[1] * 18), 0.5, -2, 2, "Exposure:"),

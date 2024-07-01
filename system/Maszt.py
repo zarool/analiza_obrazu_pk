@@ -129,7 +129,7 @@ class Maszt:
 
         # 4
         # todo returning picked image coordinates and color
-        self.detected_object = self.utils.pick_object(final_contours)
+        self.detected_object = self.utils.pick_object(self.image, final_contours)
 
     def get_current_img(self):
         return self.current_img
