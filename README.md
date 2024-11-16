@@ -8,7 +8,7 @@ innymi typami kamer. <br>
 W trakcie pracy jest dodawanie sieci neurowonych i trenowanie własnego modelu rozpoznawania obrazu, tak, aby mógł
 automatycznie przechwycić poszukiwany obiekt.
 
-![Zrzut ekranu nowej wersji programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/assets/program.png?raw=true)
+![Zrzut ekranu nowej wersji programu](./data/assets/program.png)
 
 ### Spis treści
 
@@ -25,7 +25,7 @@ automatycznie przechwycić poszukiwany obiekt.
 
 Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 
-| Folder    | Opis                                                                                                                                                                                                                                          |                
+| Folder    | Opis                                                                                                                                                                                                                                          |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `main.py` | Główny plik programu, na starcie ustawia kluczowe globalne zmienne - te podane z terminala oraz ustawione przez cv2 do odczytu obrazu z kamery. Zawiera skrypt do wygenerowania prostego GUI ze sliderami do przetwarzania uchwyconego obrazu |
 | `app/`    | Plik do modulacji obrazem, zawiera same funkcje, zwraca obraz z konturami                                                                                                                                                                     |
@@ -35,18 +35,18 @@ Niezbędne pliki do uruchomienia samej analizy obrazu (bez sieci neuronowych)
 
 ### Struktura programu przedstawiona na diagramie UML
 
-![Struktura programu](https://github.com/zarool/analiza_obrazu_pk/blob/main/assets/uml.svg?raw=true)
+![Struktura programu](./data/assets/uml.svg)
 <a name="dependencies"></a>
 
 ## Biblioteki
 
 |           | Wersja                                                                                                                                        |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Python3   | Każdy interpeter od wersji `>=3.8` nie powinien wywoływać problemu                                                                            |
-| opencv2 	 | `>= 4.0.0`- im nowsza tym lepiej, kluczowa do odbioru obrazu z kamery - konieczne jest zainstalowanie OpenCV2 ze wsparciem modułu GSTSTREAMER |
+| Python3   | `3.11`                                                                            |
+| opencv2 	 | `4.5.0`- im nowsza tym lepiej, kluczowa do odbioru obrazu z kamery - konieczne jest zainstalowanie OpenCV2 ze wsparciem modułu GSTSTREAMER |
 | numpy     | 	Zawarta w interpreterze                                                                                                                      |
 | pygame    | `>= wpisac poprawną`                                                                                                                          |
-| JetCam    | Znajduje się w folderze jetcam, nic nie trzeba zmieniać                                                                                       | 
+| JetCam    | Znajduje się w folderze jetcam, nic nie trzeba zmieniać                                                                                       |
 
 <a name="usage"></a>
 
@@ -92,7 +92,7 @@ Tryby działania kamery IMX219 użytej w programie. Tryb zmienia rozdzielczość
     - `q` - zamyka program
     - `n` oraz `b` służą do przechodzenia pomiedzy zdjęciami
 
- <br>  
+ <br>
 Zbiorczy opis kluczowych funkcji w programie:
 
 * `Maszt.py`

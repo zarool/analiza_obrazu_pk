@@ -37,11 +37,11 @@ class Devices:
         else:
             try:
                 # if not using camera, use photos in images folder
-                files = os.listdir("./images/")
+                files = os.listdir("./data/images/")
                 size = len(files)
                 for index in range(0, size):
-                    images_a.append(cv2.imread(f"./images/cam{index}.jpg"))
+                    images_a.append(cv2.imread(f"./data/images/cam{index}.jpg"))
             except FileNotFoundError:
-                print("Could not read the 'images' folder, none images received.")
+                print("Could not read the './data/images' folder, none images received.")
 
         return cam, vid, images_a
