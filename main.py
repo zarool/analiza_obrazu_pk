@@ -15,4 +15,5 @@ while True:
 # todo modernize maszt code to be more readable
 
 # todo maszt
+# todo add frame reader as in ~/programming/imx519-example/JetsonCamera.py
 # todo add algorithm that will search for object and automatically change parameters of image processing
