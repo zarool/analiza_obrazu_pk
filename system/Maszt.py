@@ -67,7 +67,7 @@ class Maszt:
         self.utils.lower_color = np.array([param[7], param[8], param[9]])
         self.utils.upper_color = np.array([param[10], param[11], param[12]])
 
-        print(self.utils.exposure, param[6])
+        # print(self.utils.exposure, param[6])
         self.update_image_exposure(param[6])
 
     def update_image_exposure(self, exposure_value):
